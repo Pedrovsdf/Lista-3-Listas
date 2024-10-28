@@ -1,2 +1,1 @@
-# Lista-3-Listas
-Questões de Listas
+As questões vão escalonando, então as com numerações mais altas são mais difíceis.
