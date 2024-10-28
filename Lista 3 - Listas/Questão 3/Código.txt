@@ -1,0 +1,85 @@
+descobrir = 1
+vitimas = []
+max = 0
+txt_vitimas = ''
+apenas_max = 0
+
+while descobrir:
+    txt_nome = input()
+    if txt_nome == 'descobrir':
+        descobrir = 0
+    else:
+        nome = txt_nome.split(", ")
+        index = 1
+        sintomas = 0
+        dor = 0
+        insonia = 0
+        pesadelos = 0
+        suor = 0
+        visoes = 0
+
+        for i in range(1, len(nome)):
+            if nome[i] == 'dor de cabeca' and dor == 0:
+                sintomas += 1
+                dor = 1
+            elif nome[i] == 'insonia' and insonia == 0:
+                sintomas += 1
+                insonia = 1
+            elif nome[i] == 'pesadelos' and pesadelos == 0:
+                sintomas += 1
+                pesadelos = 1
+            elif nome[i] == 'suor frio' and suor == 0:
+                sintomas += 1
+                suor = 1
+            elif nome[i] == 'visoes' and visoes == 0:
+                sintomas += 1
+                visoes = 1
+
+        if sintomas == 5:
+            vitimas.append(nome[0])
+            if nome[0] == 'Max':
+                max = 1
+
+if len(vitimas) == 1 and max == 1:
+    apenas_max = 1
+
+if len(vitimas) == 0:
+    print('Não conseguimos encontrar ninguém com esses sintomas, o próximo ataque do Vecna será imprevisível.')
+elif len(vitimas) > 1 and max == 0:
+    for i in range(len(vitimas)):
+        if i < len(vitimas) - 2:
+            txt_vitimas += vitimas[i]
+            txt_vitimas += ', '
+        elif i < len(vitimas) - 1:
+            txt_vitimas += vitimas[i]
+            txt_vitimas += ' e '
+        elif i < len(vitimas):
+            txt_vitimas += vitimas[i]
+    print(f'Tem {len(vitimas)} pessoa(s) na mira do Vecna!')
+    if len(vitimas) > 1:
+        print(f'Precisamos avisar {txt_vitimas} para prepararem suas músicas favoritas.')
+    else:
+        print(f'Precisamos avisar {txt_vitimas} para preparar sua música favorita.')
+elif len(vitimas) > 1 and max == 1 and apenas_max == 0:
+    vitimas.remove('Max')
+    for i in range(len(vitimas)):
+        if i < len(vitimas) - 2:
+            txt_vitimas += vitimas[i]
+            txt_vitimas += ', '
+        elif i < len(vitimas) - 1:
+            txt_vitimas += vitimas[i]
+            txt_vitimas += ' e '
+        elif i < len(vitimas):
+            txt_vitimas += vitimas[i]
+    print("Oh não, Max está em perigo! Let's run up that hill com a Kate Bush e ajudar nossa amiga.")
+    if len(vitimas) > 0:
+        print(f'Além dela, tem mais {len(vitimas)} pessoa(s) na mira do Vecna!')
+    if len(vitimas) > 1:
+        print(f'Precisamos avisar {txt_vitimas} para prepararem suas músicas favoritas.')
+    else:
+        print(f'Precisamos avisar {txt_vitimas} para preparar sua música favorita.')
+elif len(vitimas) == 1 and max == 1 and apenas_max == 1:
+    print("Oh não, Max está em perigo! Let's run up that hill com a Kate Bush e ajudar nossa amiga.")
+else:
+    print(f'Tem {len(vitimas)} pessoa(s) na mira do Vecna!')
+    print(f'Precisamos avisar {vitimas[0]} para preparar sua música favorita.')

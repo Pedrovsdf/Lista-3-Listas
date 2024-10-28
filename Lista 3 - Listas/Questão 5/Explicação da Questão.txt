@@ -1,0 +1,91 @@
+Mob (Shigeo Kageyama) fez uma excursão para o Rio de Janeiro com o Clube do Fomento Corporal - eram os jogos escolares internacionais, e o Clube representaria o Japão - mas na verdade era tudo um plano para investigar a relação entre o fantasma da série B e um anfíbio desenterrado em São Januário. Mob sob influência do famoso e divertido Keita, o maior japonês vascaíno do mundo, passou a torcer pelo Gigante da Colina e se viu animado para conhecer o místico estádio de São Januário e assistir algumas das partidas válidas pela série B do Campeonato Brasileiro. No entanto, a equipe passa por problemas técnicos e de confiança, mesmo sob a iminente entrada de quantias consideráveis de investimento externo, e vem tendo dificuldades para alcançar a pontuação necessária para garantir o acesso à série A do próximo ano (que é de 65 pontos).
+
+Com seus poderes sensitivos, ele percebeu que essa falta de um bom trato com a bola, além de um azar cômico em situações malucas nas partidas, poderiam ter a ver com algum tipo de maldição paranormal/aparição sobrenatural realizando 'brincadeirinhas' durante os jogos por motivos torpes, fúteis e passionais. Ele então decide ajudar com toda sua experiência laboral de perícia paranormal japonesa investigando revistas e jornais cariocas, descobriu que haviam causos sobre um sapo que havia sido enterrado no campo de São Januário, próximo a uma das traves, por um jogador do Andaraí, Arubinha, com o intuito de amaldiçoar o clube por 12 anos. O problema é que isso foi feito nos anos 30, e o clube continuou a passar maus bocados mesmo décadas depois (mais recentemente por rebaixamentos seguidos).
+
+Para ajudar a equipe cruzmaltina e sua torcida em eterna sofrência, Mob pediu para você, mais um maluco com conhecimento técnico, construir um programa que, a partir dos resultados das 12 últimas rodadas do campeonato, indique se o espírito do famigerado anfíbio interferiu de alguma forma no desempenho da equipe nas partidas, mostrando se o desempenho da equipe vem acompanhando a meta estipulada pela coordenação técnica e também calcule quantos pontos teriam sido perdidos por conta do sapo. Ao fim do programa, ele relata se a equipe alcançou a pontuação necessária para o tão esperado retorno à série A do campeonato.
+
+
+
+Sabendo que uma vitória dá 3 pontos, empate dá 1 ponto e uma derrota dá nenhum ponto - e que resultados podem ter sido alterados pela interferência externa do espírito do sapo -, a meta estipulada pela equipe técnica do clube, para que se alcance o acesso, é de um número de 7 pontos ganhos a cada 4 jogos.
+
+Até a rodada 26 o time alcançou 44 pontos e precisa chegar aos 65, ou seja, precisa garantir pelo menos 21 pontos nessas 12 últimas rodadas. A cada 4 partidas é necessária a verificação do progresso que foi estipulado como meta (os 7 pontos) e que se mostrem certas saídas (mostradas na seção de input e output).
+
+Na sequência é preciso que se mostre quantos pontos foram perdidos devido às interferências do sapo nos resultados (a diferença entre o que seria ganho no caso de uma partida normal e no resultado alterado pela influência externa), para então mostrar o número de pontos feitos nas 12 partidas, o número de vitórias, de empates e de derrotas, dando municiamento para que Mob tenha a resposta sobre a relevância da maldição no desempenho do time na busca pelo acesso.
+
+Input
+
+A primeira entrada será uma string com a sequência (separada por espaços) dos resultados das 12 partidas restantes para o fim do campeonato:
+
+P P P P P P P P P P P P
+
+Os resultados poderão ser V para uma vitória do Vascão, E para um empate e D para uma derrota;
+
+A segunda entrada será mais uma string, mas desta vez com uma sequência (separada por espaços) de 0's e 1's. O 0 corresponde a uma partida em que tudo correu normalmente, enquanto um 1 representa uma partida que teve seu resultado alterado. Sabe-se que uma interferência detectada numa partida vencida (”V”), altera o resultado dela para um empate (”E”), e uma interferência numa partida empatada (”E”) altera o resultado dela para uma derrota (”D”), mas uma partida que terminou com derrota (”D”), continua como uma derrota.
+
+Exemplo:
+
+primeira entrada:
+
+V V V D V D E E V V E V
+
+segunda entrada:
+
+0 0 1 1 0 0 0 0 0 0 1 0
+
+nova configuração da sequência de resultados:
+
+V V E D V D E E V V D V
+
+OBS: as entradas serão sempre amigáveis (nada de letras diferentes das especificadas, nem com espaços a mais ou a menos, nem com mais ou menos que 12 resultados. O mesmo vale para a sequência de interferências: nada de números fora do que foi especificado nem qualquer outro tipo de pegadinha.
+
+OBS 2: é permitido o uso do método split()
+
+É obrigatório o uso de listas.
+
+Output
+
+O primeiro bloco de saídas consistirá nos avisos das interferências do anfíbio nos resultados:
+
+Se uma partida antes vencida (V) teve interferência do sapo, o seguinte print deverá ser mostrado:
+“O maldito sapo interferiu no resultado! O que parecia uma vitória garantida terminou em um empate.”
+
+Se uma partida com resultado empatado (E) teve interferência, o seguinte print deverá ser mostrado:
+"O anfíbio da maldição interferiu no resultado! Um empate tranquilo virou uma frustrante derrota."
+
+Se uma partida com resultado de derrota (D) teve interferência, o seguinte print deverá ser mostrado:
+"O que já era ruim, se tornou uma humilhante derrota. Desgraçado desse sapo!"
+
+OBS: Os prints devem ser dados de acordo com a ordem das partidas interferidas e um print para cada interferência encontrada.
+
+Em seguida, devem ser mostrados prints sobre o desempenho da equipe em cada um dos 3 terços (ou fatias) de 4 jogos:
+
+Se a pontuação para o grupo/terço de 4 jogos foi igual a planejada (7 pontos), o seguinte print deverá aparecer:
+"A pontuação na {n_fatia}ª fatia de 4 jogos está dentro do planejado."
+
+onde n_fatia indica a qual terço/fatia dos 12 jogos pertence essa estatística (1ª, 2ª ou 3ª).
+
+Se a pontuação for maior que a planejada (maior que os 7 pontos), o seguinte print deverá aparecer:
+"A pontuação na {n_fatia}ª fatia de 4 jogos está com uma gordurinha de {pontos_acima} pontos."
+
+onde n_fatia indica a qual terço/fatia pertence os 4 jogos, e pontos_acima indica a margem de pontos conquistados acima dos 7 planejados.
+
+Se a pontuação for menor que a planejada (menor que os 7 pontos), o seguinte print deverá aparecer:
+"A pontuação na {n_fatia}ª fatia de 4 jogos está abaixo da planejada em {pontos_abaixo} pontos."
+
+onde n_fatia indica em que terço/fatia está contida a pontuação, e pontos_abaixo indica a margem de pontos abaixo dos 7 planejados.
+
+Logo na sequência, deverá ser mostrado um print com a quantidade de pontos perdidos como consequência de todas as interferências nos resultados. O número de pontos perdidos é a diferença entre a pontuação esperada total inicial pela pontuação esperada total final depois das interferências.
+
+Se o número de pontos perdidos foi maior que 0, o seguinte print deverá aparecer:
+"A maldição do sapo fez o Vascão perder {pontos_perdidos} pontos. Um número preocupante, que pode fazer diferença."
+
+Se o número de pontos perdidos foi 0, o seguinte print deverá ser mostrado:
+"A maldição parece que não teve impacto relevante! Não houve nenhuma perda de pontos."
+
+E finalmente, deverá ser mostrado se a equipe alcançou a pontuação necessária para garantir o acesso, junto de suas informações de número de vitórias, empates e derrotas:
+
+Se o total de pontos conquistados nos 12 jogos se igualou ou superou a marca de 21 pontos, o seguinte print deverá aparecer:
+"Na reta final do campeonato, o Vasco garantiu um total de {pontuacao_total} pontos, com {n_vitorias} vitórias, {n_empates} empates e {n_derrotas} derrotas, e alcançou o tão esperado acesso. O Clube do Fomento Corporal vibra num SJ lotado!"
+
+Se por acaso o total de pontos nos 12 jogos não alcançar os 21, o print a seguir deverá aparecer:
+"Na reta final do campeonato, o Vasco fez somente {pontuacao_total} pontos, com {n_vitorias} vitórias, {n_empates} empates e {n_derrotas} derrotas, e não conseguiu o acesso. Mais um ano de série B e sofrimento. Mob, o clube e a torcida estão completamente desolados."

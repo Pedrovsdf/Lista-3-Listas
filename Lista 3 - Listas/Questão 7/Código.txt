@@ -1,0 +1,59 @@
+qtd_mochilas = int(input())
+str_nomes = input()
+nomes = str_nomes.split(" ")
+mochilas_tamanho = []
+mochilas_itens = []
+acao_final = 1
+
+for i in range(qtd_mochilas):
+    mochilas_tamanho.append(int(input()))
+    mochilas_itens.append([])
+
+itens_adicionados = int(input())
+
+for i in range(qtd_mochilas):
+  mochilas_itens[i].append('Lanterna')
+  mochilas_itens[i].append('Omega 3 da top therm')
+
+for i in range(itens_adicionados):
+    item = input()
+    index_mochila = int(input())
+    if int(mochilas_tamanho[index_mochila]) - 2 > 0:
+        mochilas_itens[index_mochila].append(item)
+        mochilas_tamanho[index_mochila] = int(mochilas_tamanho[index_mochila])
+        mochilas_tamanho[index_mochila] -= 1
+    else:
+        print('Mochila cheia. Não vai dar para levar.')
+
+while acao_final:
+    acao = input()
+    if acao == 'Tirar da mochila':
+        item_acao = input()
+        mochila_item_acao = int(input())
+        if item_acao in mochilas_itens[mochila_item_acao]:
+            print(f'{item_acao} usado com sucesso da mochila {mochila_item_acao}.')
+            index_acao = mochilas_itens[mochila_item_acao].index(item_acao)
+            mochilas_itens[mochila_item_acao].pop(index_acao)
+            mochilas_tamanho[mochila_item_acao] = int(mochilas_tamanho[mochila_item_acao])
+            mochilas_tamanho[mochila_item_acao] += 1
+        else:
+            print(f'Você não tem {item_acao} na mochila {mochila_item_acao}.')
+    elif acao == 'Guardar na mochila':
+        item_acao = input()
+        mochila_item_acao = int(input())
+        if int(mochilas_tamanho[mochila_item_acao]) - 2 > 0:
+            mochilas_itens[mochila_item_acao].append(item_acao)
+            mochilas_tamanho[mochila_item_acao] = int(mochilas_tamanho[mochila_item_acao])
+            mochilas_tamanho[mochila_item_acao] -= 1
+            print(f'{item_acao} adicionado na mochila {mochila_item_acao}.')
+        else:
+            print(f'Mochila {mochila_item_acao} cheia!')
+    elif acao == 'CHEGAMOS NO CIN!':
+        acao_final = 0
+    else:
+        print('Ação inválida.')
+
+for i in range(qtd_mochilas):
+    print(f'Mochila de {nomes[i]} chegou assim:')
+    for j in range(len(mochilas_itens[i])):
+        print(mochilas_itens[i][j])

@@ -1,0 +1,33 @@
+Sam e Dean resolveram tirar umas férias no Brasil, com isso, passaram no CInverso Shopping e compraram alguns CD's de música nacional para ouvir durante sua viagem. Por não saberem falar português, eles te chamaram para criar um programa que, dado as músicas e as notas dadas por eles, faz uma soma para descobrir a nota total e armazena para uma consulta futura.
+
+OBS: Sam e Dean são indecisos e podem mudar de nota desde que o outro também não tenha votado.
+
+Input
+
+A primeira linha contém os nomes dos artistas dos CD's separados por hífen.
+
+artista1 - ... - artistaN
+
+Para cada artista, será dado o nome das músicas do artista separadas por hífen.
+
+musica1 - ... - musicaN
+
+Ao ouvir a música, cada um Winchester irá fazer diversos comentários, até que um comentário seja um número inteiro entre 0 e 10 que é a nota.
+
+nome: comentário
+
+OBS: O nome sempre será "Dean" ou "Sam".
+
+Por fim, algum Winchester irá dizer o nome de um artista e o nome de uma música que ele gostaria de ouvir.
+
+nome: nome_artista - nome_musica
+
+Output
+
+Se a música escolhida for a música com a maior nota:
+
+Caraca {nome} mandou bem! Essa música é a mais braba, com a nota {nota}
+
+Caso contrário:
+
+Podia ter escolhido outra música, {nome}. Essa é boa, mas perde em {diferença} pontos pra a música com a melhor nota

@@ -1,0 +1,25 @@
+palavras = []
+palavras_chave = []
+cont = 0
+soma = 0
+for i in range(10):
+    palavra = input()
+    palavras.append(palavra)
+
+for i in range(10):
+    for j in range(10):
+        if palavras[i] == palavras[j]:
+            cont += 1
+            if cont == 2:
+              break
+    if cont == 1:
+        palavras_chave.append(palavras[i])
+    cont = 0
+
+if len(palavras_chave) >= 0:
+    print('As palavras sao:')
+    for i in range(len(palavras_chave)):
+        print(palavras_chave[i])
+        soma += len(palavras_chave[i])
+    print(f'A soma do tamanho das palavras é: {soma}')
+    print('Estou impressionado, você me venceu, pode ir embora...')

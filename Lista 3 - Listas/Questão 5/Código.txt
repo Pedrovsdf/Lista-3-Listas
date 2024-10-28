@@ -1,0 +1,62 @@
+txt_partidas = input()
+partidas = txt_partidas.split()
+txt_alteracao = input()
+alteracao = txt_alteracao.split()
+cont = 1
+resultados = [0, 0, 0]
+resultados_pontos = 0
+soma_fatias = 0
+fatias = [0, 0, 0]
+pontos_perdidos = 0
+
+for i in range(12):
+    if alteracao[i] == '1':
+        if partidas[i] == 'V':
+            pontos_perdidos += 2
+            partidas[i] = 'E'
+            print('O maldito sapo interferiu no resultado! O que parecia uma vitória garantida terminou em um empate.')
+        elif partidas[i] == 'E':
+            pontos_perdidos += 1
+            partidas[i] = 'D'
+            print('O anfíbio da maldição interferiu no resultado! Um empate tranquilo virou uma frustrante derrota.')
+        elif partidas[i] == 'D':
+            print('O que já era ruim, se tornou uma humilhante derrota. Desgraçado desse sapo!')
+
+    if partidas[i] == 'V':
+        resultados[0] += 1
+        resultados_pontos += 3
+        soma_fatias += 3
+    if partidas[i] == 'E':
+        resultados[1] += 1
+        resultados_pontos += 1
+        soma_fatias += 1
+    if partidas[i] == 'D':
+        resultados[2] += 1
+
+    if cont % 4 == 0:
+        fatias[int(i/4)] = soma_fatias
+        soma_fatias = 0
+
+    cont += 1
+
+for i in range(3):
+    if fatias[i] == 7:
+        print(f'A pontuação na {i+1}ª fatia de 4 jogos está dentro do planejado.')
+    elif fatias[i] > 7:
+        print(f'A pontuação na {i+1}ª fatia de 4 jogos está com uma gordurinha de {fatias[i]-7} pontos.')
+    else:
+        print(f'A pontuação na {i+1}ª fatia de 4 jogos está abaixo da planejada em {7-fatias[i]} pontos.')
+
+if pontos_perdidos > 0:
+    print(f'A maldição do sapo fez o Vascão perder {pontos_perdidos} pontos. Um número preocupante, que pode fazer diferença.')
+else:
+    print('A maldição parece que não teve impacto relevante! Não houve nenhuma perda de pontos.')
+
+if resultados_pontos >= 21:
+    print(f'Na reta final do campeonato, o Vasco garantiu um total de {resultados_pontos} pontos, com {resultados[0]} vitórias, '
+          f'{resultados[1]} empates e {resultados[2]} derrotas, e alcançou o tão esperado acesso. '
+          f'O Clube do Fomento Corporal vibra num SJ lotado!')
+else:
+    print(f'Na reta final do campeonato, o Vasco fez somente {resultados_pontos} pontos, com {resultados[0]} vitórias, '
+          f'{resultados[1]} empates e {resultados[2]} derrotas, e não conseguiu o acesso. Mais um ano de série B e sofrimento. '
+          f'Mob, o clube e a torcida estão completamente desolados.')

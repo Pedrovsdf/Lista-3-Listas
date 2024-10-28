@@ -1,0 +1,91 @@
+Após um cansativo e longo dia de aulas, você decide passar a noite no CIn com seus amigos para realizar exercícios, no entanto algo estranho aconteceu, começaram a soar alarmes por todos os corredores, e você se depara com algo no mínimo intrigante. UM ZUMBI!
+
+gif
+
+Com esse perigo a solta, você procura seu crachá para sair o mais rápido do CIn, mas logo percebe que ele não está com você. A única maneira de escapar é encontrando o crachá e depois sair pela porta.
+
+O CIn será representado por uma matriz 6x6, onde nela há Você, o Zumbi, o Crachá e a Porta de saída, onde cada um será posicionado em uma coordenada nessa matriz. Em cada rodada, o Zumbi se movimentará primeiro em direção a você, esse movimento sempre será com prioridade na coordenada X em sua direção, e quando estiver na mesma coluna que você, ele se movimentará na coordenada Y.
+
+Após o movimento do Zumbi, será sua vez de movimentar-se, da mesma maneira que o Zumbi, sendo que em direção ao objeto, primeiro o Crachá, depois a Porta.
+
+Observação: Após pegar o crachá, você ficará 1 rodada parado, enquanto o Zumbi anda em sua direção.
+
+Observação 2: O Zumbi não irá passar por cima da Porta ou do Crachá, portanto, desconsidere essa situação.
+
+Detalhe: Para simplificar, não haverá casos em que você anda para a posição do Zumbi, apenas na vez dele é que você pode perder.
+
+Input
+
+As entradas serão compostas pelas coordenadas iniciais de cada um, Você, o Zumbi, o Crachá, e a Porta.
+
+voceY
+
+voceX
+
+zumbiY
+
+zumbiX
+
+crachaY
+
+crachaX
+
+portaY
+
+portaX
+
+Output
+
+Em cada rodada deve ser exibida a matriz do CIn, com um espaço entre cada elemento. Cada espaço vazio é representado por um “-”, Você por um “V”, o Zumbi por um “Z”, o Crachá por um “C” e a Porta por um “P”.
+
+Assim seria uma possível matriz inicial do CIn:
+
+- V - - - -
+- - - - - P
+- C - - - -
+- - - - - -
+- - - - - -
+- - - - Z -
+Após exibir a matriz do CIn, é preciso mostrar:
+
+Caso você pegue o crachá na rodada:
+
+“Finalmente! Peguei o crachá”
+
+Caso já tenha pego o crachá anteriormente:
+
+“Já peguei o crachá”
+
+Caso ainda não tenha pego o crachá:
+
+“Ainda não achei o crachá”
+
+Após isso, você irá calcular o distância entre Você e o Zumbi, através dessa fórmula:
+
+Untitled
+
+O resultado deve ser transformado em um inteiro
+
+Caso o resultado seja menor ou igual a 3:
+
+“Preciso acelerar, o zumbi tá na minha cola!”
+
+Caso o resultado seja maior que 3 e menor ou igual a 4:
+
+“Consigo ver la longe o zumbi, mas é melhor acelerar!”
+
+Caso o resultado seja maior que 4:
+
+“O zumbi está longe, mas não posso ficar parado”
+
+Após isso, deve-se pular uma linha!
+
+Ao fim do seu programa, não serão exibidos nenhuma das duas frases acima, apenas UMA das duas abaixo:
+
+Caso você chegou à porta:
+
+“Consegui achar a porta, agora é so passar na catraca e vazar daqui!”
+
+No entanto, caso você seja pego pelo zumbi:
+
+“Ferrou, agora vou virar um zumbi”

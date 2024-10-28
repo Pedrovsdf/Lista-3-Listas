@@ -1,0 +1,64 @@
+frascos = int(input())
+entradas = int(input())
+str_elementos = ''
+lista_valores = []
+lista_nomes = []
+soma = 0
+igual = 0
+i = 0
+nomes = ''
+
+for i in range(entradas):
+    str_elementos += input()
+    str_elementos += ' '
+
+lista_elementos = str_elementos.split()
+
+for i in range(1, entradas * 2, 2):
+    lista_valores.append(lista_elementos[i])
+
+lista_valores2 = lista_valores
+
+for i in range(0, entradas * 2, 2):
+    lista_nomes.append(lista_elementos[i])
+
+lista_nomes2 = lista_nomes
+valor1 = 0
+valor2 = 0
+
+if len(lista_valores2) == 1:
+  lista_valores2[0] = int(lista_valores2[0])
+  if lista_valores2[0] == frascos:
+    igual = 1
+    nomes = lista_nomes2[0]
+else:
+  for i in range(len(lista_valores2)):
+      nomes += lista_nomes2[i]
+      nomes += ' '
+      for j in range(i+1, len(lista_valores2)):
+          valor1 = int(lista_valores2[i])
+          valor2 = int(lista_valores2[j])
+          if valor1 == frascos:
+            nomes = lista_nomes2[i]
+            igual = 1
+            break
+          if j == i+1:
+            soma += valor1 + valor2 
+          else:
+            soma += valor2
+          nomes += lista_nomes2[j]
+          if soma == frascos:
+              igual = 1
+              break
+          nomes += ' '
+      if soma == frascos:
+          break
+      if valor1 == frascos:
+          break
+      nomes = ''
+      soma = 0
+
+if igual == 1:
+    print(f'Vencemos a batalha e a humanidade foi restaurada! {nomes} foram usados para deszumbificar')
+else:
+    print(f'Estou sentido algo estranho... será que também vou virar zumbi?')

@@ -1,0 +1,60 @@
+n = int(input())
+matriz = []
+maior_linha, maior_coluna, maior_diagonal = 0, 0, 0
+primeiro_linha, primeiro_coluna, primeiro_diagonal = 0, 0, 0
+segundo_linha, segundo_coluna, segundo_diagonal = 0, 0, 0
+senha = ''
+soma = 0
+
+for i in range(n):
+    matriz.append(list(map(int, input().split())))
+
+maior_linha = matriz[0][0] + matriz[0][1]
+primeiro_linha = str(matriz[0][0])
+segundo_linha = str(matriz[0][1])
+
+for i in range(n):
+    for j in range(n-1):
+        soma = matriz[i][j] + matriz[i][j+1]
+        if soma > maior_linha:
+            maior_linha = soma
+            primeiro_linha = str(matriz[i][j])
+            segundo_linha = str(matriz[i][j+1])
+    soma = 0
+
+maior_linha = primeiro_linha + segundo_linha
+
+maior_coluna = matriz[0][0] + matriz[1][0]
+primeiro_coluna = str(matriz[0][0])
+segundo_coluna = str(matriz[1][0])
+
+for i in range(n):
+    for j in range(n-1):
+        soma = matriz[j][i] + matriz[j+1][i]
+        if soma > maior_coluna:
+            maior_coluna = soma
+            primeiro_coluna = str(matriz[j][i])
+            segundo_coluna = str(matriz[j+1][i])
+    soma = 0
+
+maior_coluna = primeiro_coluna + segundo_coluna
+
+maior_diagonal = matriz[0][0] + matriz[1][1]
+primeiro_diagonal = str(matriz[0][0])
+segundo_diagonal = str(matriz[1][1])
+
+for j in range(n-1):
+    soma = 0
+    soma = matriz[j][j] + matriz[j+1][j+1]
+    if soma > maior_diagonal:
+        maior_diagonal = soma
+        primeiro_diagonal = str(matriz[j][j])
+        segundo_diagonal = str(matriz[j+1][j+1])
+
+maior_diagonal = primeiro_diagonal + segundo_diagonal
+
+senha = maior_linha + maior_coluna + maior_diagonal
+
+print(f'Falei que era fácil Dustinzinho...\nPegando todas os números que formam '
+      f'as combinações dos pares de cada sentido temos...\n'
+      f'Password: {senha}')

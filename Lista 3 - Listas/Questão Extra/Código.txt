@@ -1,0 +1,502 @@
+import math
+matriz = []
+voceY = int(input())
+voceX = int(input())
+zumbiY = int(input())
+zumbiX = int(input())
+crachaY = int(input())
+crachaX = int(input())
+portaY = int(input())
+portaX = int(input())
+nao_parou = 1
+distancia = 0
+coluna_cracha = False
+coluna_pessoa = False
+coluna_porta = False
+pegou_cracha = False
+zumbi_pegou = False
+parado = False
+primeiro_movimento = True
+pegou_cracha_verificar = False
+zumbi_quebrou = False
+
+for i in range(6):
+    matriz.append(list(map(str, ('-'*6))))
+
+matriz[voceY][voceX] = 'V'
+matriz[zumbiY][zumbiX] = 'Z'
+matriz[crachaY][crachaX] = 'C'
+matriz[portaY][portaX] = 'P'
+
+primeiro_movimento = True
+segundo_movimento = True
+if voceX == crachaX:
+    coluna_cracha = True
+
+#modificação
+if zumbiX == voceX:
+    segundo_movimento = False
+
+while not coluna_cracha:
+    if not primeiro_movimento:
+        if not segundo_movimento:
+            for i in range(6):
+                for j in range(6):
+                    if j == 5:
+                        print(f'{matriz[i][j]}', end='')
+                    else:
+                        print(f'{matriz[i][j]}', end=' ')
+                print()
+            print('Ainda não achei o crachá')
+            distancia = int(math.sqrt(math.pow((voceX - zumbiX), 2) + math.pow((voceY - zumbiY), 2)))
+            if distancia <= 3:
+                print('Preciso acelerar, o zumbi tá na minha cola!')
+            elif distancia > 3 and distancia <= 4:
+                print('Consigo ver la longe o zumbi, mas é melhor acelerar!')
+            else:
+                print('O zumbi está longe, mas não posso ficar parado')
+            print('')
+        segundo_movimento = False
+
+    pos_antigaY = voceY
+    pos_antigaX = voceX
+
+    if (abs(zumbiX - voceX) == 1 and abs(zumbiY - voceY) == 0) or \
+            (abs(zumbiX - voceX) == 0 and abs(zumbiY - voceY) == 1):
+        matriz[zumbiY][zumbiX] = '-'
+        zumbiY = pos_antigaY
+        zumbiX = pos_antigaX
+        matriz[voceY][voceX] = 'Z'
+        for i in range(6):
+            for j in range(6):
+                if j == 5:
+                    print(f'{matriz[i][j]}', end='')
+                else:
+                    print(f'{matriz[i][j]}', end=' ')
+            print()
+        zumbi_pegou = True
+        print('Ferrou, agora vou virar um zumbi')
+        break
+
+    if voceY == crachaY and voceX == crachaX:
+        pegou_cracha = True
+        parado = True
+        break
+    if voceX == crachaX:
+        coluna_cracha = True
+        segundo_movimento = True
+        break
+
+    if zumbiX > voceX:
+        segundo_movimento = False
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY][zumbiX - 1] = 'Z'
+        zumbiX -= 1
+        coluna_pessoa = False
+    elif zumbiX < voceX:
+        segundo_movimento = False
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY][zumbiX + 1] = 'Z'
+        zumbiX += 1
+        coluna_pessoa = False
+    else:
+        coluna_pessoa = True
+
+    if coluna_pessoa and zumbiY > voceY:
+        segundo_movimento = False
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY - 1][zumbiX] = 'Z'
+        zumbiY -= 1
+    elif coluna_pessoa and zumbiY < voceY:
+        segundo_movimento = False
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY + 1][zumbiX] = 'Z'
+        zumbiY += 1
+    elif coluna_pessoa:
+        zumbi_pegou = True
+        print('Ferrou, agora vou virar um zumbi')
+        break
+
+    if voceX > crachaX:
+        matriz[voceY][voceX] = '-'
+        pos_antigaY = voceY
+        pos_antigaX = voceX
+        matriz[voceY][voceX - 1] = 'V'
+        voceX -= 1
+    elif voceX < crachaX:
+        matriz[voceY][voceX] = '-'
+        pos_antigaY = voceY
+        pos_antigaX = voceX
+        matriz[voceY][voceX + 1] = 'V'
+        voceX += 1
+
+    primeiro_movimento = False
+
+primeiro_movimento = True
+pos_antigaY = voceY
+pos_antigaX = voceX
+
+while coluna_cracha and not zumbi_pegou and not pegou_cracha:
+    if voceY == crachaY:
+        pegou_cracha = True
+        parado = True
+        if not zumbi_quebrou:
+            for i in range(6):
+                for j in range(6):
+                    if j == 5:
+                        print(f'{matriz[i][j]}', end='')
+                    else:
+                        print(f'{matriz[i][j]}', end=' ')
+                print()
+        if zumbiX == crachaX and zumbiY == crachaY:
+            zumbi_quebrou = True
+        if zumbi_quebrou:
+            if (abs(zumbiX - crachaX) == 1 and abs(zumbiY - crachaY) == 0) or \
+                    (abs(zumbiX - crachaX) == 0 and abs(zumbiY - crachaY) == 1):
+                if (abs(zumbiX - voceX) == 1 and abs(zumbiY - voceY) == 0) or \
+                        (abs(zumbiX - voceX) == 0 and abs(zumbiY - voceY) == 1):
+                    matriz[voceY][voceX] = '-'
+                    matriz[zumbiY][zumbiX] = '-'
+                    zumbiY = pos_antigaY
+                    zumbiX = pos_antigaX
+                    matriz[zumbiY][zumbiX] = 'Z'
+                    for i in range(6):
+                        for j in range(6):
+                            if j == 5:
+                                print(f'{matriz[i][j]}', end='')
+                            else:
+                                print(f'{matriz[i][j]}', end=' ')
+                        print()
+                    zumbi_pegou = True
+                    print('Ferrou, agora vou virar um zumbi')
+        break
+
+    if not segundo_movimento:
+        for i in range(6):
+            for j in range(6):
+                if j == 5:
+                    print(f'{matriz[i][j]}', end='')
+                else:
+                    print(f'{matriz[i][j]}', end=' ')
+            print()
+        print('Ainda não achei o crachá')
+        distancia = int(math.sqrt(math.pow((voceX - zumbiX), 2) + math.pow((voceY - zumbiY), 2)))
+        if distancia <= 3:
+            print('Preciso acelerar, o zumbi tá na minha cola!')
+        elif distancia > 3 and distancia <= 4:
+            print('Consigo ver la longe o zumbi, mas é melhor acelerar!')
+        else:
+            print('O zumbi está longe, mas não posso ficar parado')
+        print('')
+
+    if (abs(zumbiX - voceX) == 1 and abs(zumbiY - voceY) == 0) or \
+            (abs(zumbiX - voceX) == 0 and abs(zumbiY - voceY) == 1):
+        matriz[voceY][voceX] = '-'
+        matriz[zumbiY][zumbiX] = '-'
+        zumbiY = voceY
+        zumbiX = voceX
+        matriz[zumbiY][zumbiX] = 'Z'
+        for i in range(6):
+            for j in range(6):
+                if j == 5:
+                    print(f'{matriz[i][j]}', end='')
+                else:
+                    print(f'{matriz[i][j]}', end=' ')
+            print()
+        zumbi_pegou = True
+        print('Ferrou, agora vou virar um zumbi')
+        break
+
+    if zumbiX > voceX and not pegou_cracha:
+        segundo_movimento = False
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY][zumbiX - 1] = 'Z'
+        zumbiX -= 1
+        coluna_pessoa = False
+    elif zumbiX < voceX and not pegou_cracha:
+        segundo_movimento = False
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY][zumbiX + 1] = 'Z'
+        zumbiX += 1
+        coluna_pessoa = False
+    elif not pegou_cracha:
+        coluna_pessoa = True
+
+    if coluna_pessoa and zumbiY > voceY and not pegou_cracha:
+        segundo_movimento = False
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY - 1][zumbiX] = 'Z'
+        zumbiY -= 1
+    elif coluna_pessoa and zumbiY < voceY and not pegou_cracha:
+        segundo_movimento = False
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY + 1][zumbiX] = 'Z'
+        zumbiY += 1
+    elif coluna_pessoa and not pegou_cracha:
+        zumbi_pegou = True
+        print('Ferrou, agora vou virar um zumbi')
+        break
+
+    if voceY > crachaY:
+        matriz[voceY][voceX] = '-'
+        pos_antigaY = voceY
+        pos_antigaX = voceX
+        matriz[voceY - 1][voceX] = 'V'
+        voceY -= 1
+    elif voceY < crachaY:
+        matriz[voceY][voceX] = '-'
+        pos_antigaY = voceY
+        pos_antigaX = voceX
+        matriz[voceY + 1][voceX] = 'V'
+        voceY += 1
+
+    if zumbiX == crachaX and zumbiY == crachaY:
+        zumbi_quebrou = True
+    primeiro_movimento = False
+
+    segundo_movimento = False
+
+primeiro_movimento = True
+primeiro_finalmente = False
+
+if not zumbi_pegou:
+    primeiro_finalmente = True
+    print('Finalmente! Peguei o crachá')
+    distancia = int(math.sqrt(math.pow((voceX - zumbiX), 2) + math.pow((voceY - zumbiY), 2)))
+    if distancia <= 3:
+        print('Preciso acelerar, o zumbi tá na minha cola!')
+    elif distancia > 3 and distancia <= 4:
+        print('Consigo ver la longe o zumbi, mas é melhor acelerar!')
+    else:
+        print('O zumbi está longe, mas não posso ficar parado')
+    print('')
+    if (abs(zumbiX - voceX) == 1 and abs(zumbiY - voceY) == 0) or \
+            (abs(zumbiX - voceX) == 0 and abs(zumbiY - voceY) == 1):
+        matriz[zumbiY][zumbiX] = '-'
+        zumbiY = pos_antigaY
+        zumbiX = pos_antigaX
+        matriz[voceY][voceX] = 'Z'
+        for i in range(6):
+            for j in range(6):
+                if j == 5:
+                    print(f'{matriz[i][j]}', end='')
+                else:
+                    print(f'{matriz[i][j]}', end=' ')
+            print()
+        zumbi_pegou = True
+        print('Ferrou, agora vou virar um zumbi')
+
+if not zumbi_pegou:
+    if not primeiro_finalmente:
+        for i in range(6):
+            for j in range(6):
+                if j == 5:
+                    print(f'{matriz[i][j]}', end='')
+                else:
+                    print(f'{matriz[i][j]}', end=' ')
+            print()
+        print('Finalmente! Peguei o crachá')
+        distancia = int(math.sqrt(math.pow((voceX - zumbiX), 2) + math.pow((voceY - zumbiY), 2)))
+        if distancia <= 3:
+            print('Preciso acelerar, o zumbi tá na minha cola!')
+        elif distancia > 3 and distancia <= 4:
+            print('Consigo ver la longe o zumbi, mas é melhor acelerar!')
+        else:
+            print('O zumbi está longe, mas não posso ficar parado')
+        print('')
+
+        pos_antigaY = voceY
+        pos_antigaX = voceX
+
+    if (abs(zumbiX - voceX) == 1 and abs(zumbiY - voceY) == 0) or \
+            (abs(zumbiX - voceX) == 0 and abs(zumbiY - voceY) == 1):
+        matriz[zumbiY][zumbiX] = '-'
+        zumbiY = pos_antigaY
+        zumbiX = pos_antigaX
+        matriz[voceY][voceX] = 'Z'
+        for i in range(6):
+            for j in range(6):
+                if j == 5:
+                    print(f'{matriz[i][j]}', end='')
+                else:
+                    print(f'{matriz[i][j]}', end=' ')
+            print()
+        zumbi_pegou = True
+        print('Ferrou, agora vou virar um zumbi')
+
+while not coluna_porta and not zumbi_pegou and pegou_cracha:
+    if voceX == portaX:
+        coluna_porta = True
+        if (abs(zumbiX - voceX) == 1 and abs(zumbiY - voceY) == 0) or \
+                (abs(zumbiX - voceX) == 0 and abs(zumbiY - voceY) == 1):
+            zumbiY = pos_antigaY
+            zumbiX = pos_antigaX
+            matriz[zumbiY][zumbiX] = 'Z'
+            matriz[voceY][voceX] = '-'
+            for i in range(6):
+                for j in range(6):
+                    if j == 5:
+                        print(f'{matriz[i][j]}', end='')
+                    else:
+                        print(f'{matriz[i][j]}', end=' ')
+                print()
+            zumbi_pegou = True
+            print('Ferrou, agora vou virar um zumbi')
+            break
+        break
+    if not primeiro_movimento:
+        for i in range(6):
+            for j in range(6):
+                if j == 5:
+                    print(f'{matriz[i][j]}', end='')
+                else:
+                    print(f'{matriz[i][j]}', end=' ')
+            print()
+        print('Já peguei o crachá')
+        distancia = int(math.sqrt(math.pow((voceX - zumbiX), 2) + math.pow((voceY - zumbiY), 2)))
+        if distancia <= 3:
+            print('Preciso acelerar, o zumbi tá na minha cola!')
+        elif distancia > 3 and distancia <= 4:
+            print('Consigo ver la longe o zumbi, mas é melhor acelerar!')
+        else:
+            print('O zumbi está longe, mas não posso ficar parado')
+        print('')
+
+    if zumbiX > voceX:
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY][zumbiX - 1] = 'Z'
+        zumbiX -= 1
+        coluna_pessoa = False
+    elif zumbiX < voceX:
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY][zumbiX + 1] = 'Z'
+        zumbiX += 1
+        coluna_pessoa = False
+    else:
+        coluna_pessoa = True
+
+    if coluna_pessoa and zumbiY > voceY:
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY - 1][zumbiX] = 'Z'
+        zumbiY -= 1
+    elif coluna_pessoa and zumbiY < voceY:
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY + 1][zumbiX] = 'Z'
+        zumbiY += 1
+    elif coluna_pessoa:
+        zumbi_pegou = True
+        print('Ferrou, agora vou virar um zumbi')
+        break
+
+    if not primeiro_movimento:
+        if (abs(zumbiX - voceX) == 1 and abs(zumbiY - voceY) == 0) or \
+                (abs(zumbiX - voceX) == 0 and abs(zumbiY - voceY) == 1) or \
+                (abs(zumbiX - voceX) == 0 and abs(zumbiY - voceY) == 0):
+            matriz[zumbiY][zumbiX] = '-'
+            zumbiY = pos_antigaY
+            zumbiX = pos_antigaX
+            matriz[voceY][voceX] = 'Z'
+            for i in range(6):
+                for j in range(6):
+                    if j == 5:
+                        print(f'{matriz[i][j]}', end='')
+                    else:
+                        print(f'{matriz[i][j]}', end=' ')
+                print()
+            zumbi_pegou = True
+            print('Ferrou, agora vou virar um zumbi')
+            break
+
+    if not primeiro_movimento:
+        if voceX > portaX:
+            matriz[voceY][voceX] = '-'
+            pos_antigaY = voceY
+            pos_antigaX = voceX
+            matriz[voceY][voceX - 1] = 'V'
+            voceX -= 1
+        elif voceX < portaX:
+            matriz[voceY][voceX] = '-'
+            pos_antigaY = voceY
+            pos_antigaX = voceX
+            matriz[voceY][voceX + 1] = 'V'
+            voceX += 1
+        else:
+            coluna_porta = True
+            break
+
+    primeiro_movimento = False
+
+#Está na coluna da porta
+while coluna_porta and not zumbi_pegou and pegou_cracha:
+    for i in range(6):
+        for j in range(6):
+            if j == 5:
+                print(f'{matriz[i][j]}', end='')
+            else:
+                print(f'{matriz[i][j]}', end=' ')
+        print()
+    if voceY == portaY:
+        print('Consegui achar a porta, agora é so passar na catraca e vazar daqui!')
+        break
+    else:
+        print('Já peguei o crachá')
+    distancia = int(math.sqrt(math.pow((voceX - zumbiX), 2) + math.pow((voceY - zumbiY), 2)))
+    if distancia <= 3:
+        print('Preciso acelerar, o zumbi tá na minha cola!')
+    elif distancia > 3 and distancia <= 4:
+        print('Consigo ver la longe o zumbi, mas é melhor acelerar!')
+    else:
+        print('O zumbi está longe, mas não posso ficar parado')
+    print('')
+
+    if (abs(zumbiX - voceX) == 1 and abs(zumbiY - voceY) == 0) or \
+            (abs(zumbiX - voceX) == 0 and abs(zumbiY - voceY) == 1):
+        matriz[zumbiY][zumbiX] = '-'
+        zumbiY = pos_antigaY
+        zumbiX = pos_antigaX
+        matriz[voceY][voceX] = 'Z'
+        for i in range(6):
+            for j in range(6):
+                if j == 5:
+                    print(f'{matriz[i][j]}', end='')
+                else:
+                    print(f'{matriz[i][j]}', end=' ')
+            print()
+        zumbi_pegou = True
+        print('Ferrou, agora vou virar um zumbi')
+        break
+
+    if zumbiX > voceX:
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY][zumbiX - 1] = 'Z'
+        zumbiX -= 1
+        coluna_pessoa = False
+    elif zumbiX < voceX:
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY][zumbiX + 1] = 'Z'
+        zumbiX += 1
+        coluna_pessoa = False
+    else:
+        coluna_pessoa = True
+
+    if coluna_pessoa and zumbiY > voceY:
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY - 1][zumbiX] = 'Z'
+        zumbiY -= 1
+    elif coluna_pessoa and zumbiY < voceY:
+        matriz[zumbiY][zumbiX] = '-'
+        matriz[zumbiY + 1][zumbiX] = 'Z'
+        zumbiY += 1
+    elif coluna_pessoa:
+        zumbi_pegou = True
+        print('Ferrou, agora vou virar um zumbi')
+        break
+
+    if voceY > portaY:
+        matriz[voceY][voceX] = '-'
+        matriz[voceY - 1][voceX] = 'V'
+        voceY -= 1
+    elif voceY < portaY:
+        matriz[voceY][voceX] = '-'
+        matriz[voceY + 1][voceX] = 'V'
+        voceY += 1

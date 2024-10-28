@@ -1,0 +1,40 @@
+Diante do cenário distópico relatado na série The Walking Dead, você, um dos poucos sobreviventes, foi contratado para colaborar na pesquisa da deszumbificação para salvar as pessoas que se tornaram zumbis mas ainda estão vivas.
+
+Imgur
+
+Você precisará ajudar os pesquisadores para descobrir se há uma solução para esse problema, acessando arquivos de pesquisadores e estudando as informações dadas por eles, procurando uma fórmula para deszumbificar as pessoas zumbificadas.
+
+Haverá cura se houver uma soma exata da quantidade de elementos químicos em uma sublista contínua igual ao número de frascos disponíveis no laboratório, levando em conta que essa soma dever ser o somatório dos elementos de uma sublista contínua da lista de elementos químicos na ordem em que são dados. Ou seja, é preciso achar uma soma exatamente igual ao número de frascos em um subconjunto dos elementos, e só será possível agrupar os elementos para somar suas quantidades se eles forem componentes de um intervalo contínuo da lista de elementos químicos na ordem informada na entrada.
+
+Exemplo: [500, 1200, 300, 10] é uma lista de entrada no caso teste 1
+
+[500, 1200] é um sublista contínua, pois contém elementos da lista original e eles estão na mesma ordem, são um pedaço da lista anterior
+
+[500, 300] não é uma sublista contínua, pois os elementos não são contínuos, são elementos que não são seguidos um pelo outro
+
+Nessa questão, você pode usar o método de listas .pop() se achar necessário
+
+Input
+
+Como entrada, você vai receber:
+
+N
+
+Um inteiro N que indica a quantidade de frascos disponíveis no laboratório
+M
+
+Um inteiro M que indica a quantidade de entradas seguintes
+StringM NumM
+
+Uma quantidade M de linhas que vão conter o nome de um elemento químico contido na fórmula e a respectiva quantidade de cada um deles separados por espaço
+Output
+
+A saída vai seguir o seguinte critério:
+
+Se houver uma soma exata de elementos químicos igual ao número de frascos disponíveis, imprima:
+"Vencemos a batalha e a humanidade foi restaurada! {elementos} foram usados para deszumbificar"
+
+sendo {elementos} os elementos utilizados para compor a soma separados por espaço e na ordem que foram informados na entrada
+
+Se não houver nenhuma soma das sublistas que resulte exatamente igual ao número de frascos disponíveis, imprima:
+"Estou sentido algo estranho... será que também vou virar zumbi?"

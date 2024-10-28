@@ -1,0 +1,39 @@
+Bonna e João adoram assistir filmes juntos nos finais de semana. Todos os meses, eles escolhem um gênero diferente para assistirem durante o mês. Para o mês de agosto, o gênero escolhido foi o de terror/suspense, e eles combinaram que, cada semana, um deles apresenta uma lista com sugestão de filmes e as notas que eles possuem no fórum de críticas a filmes dos alunos do CIn, o CInema.com.br. Para melhor visualização, Bonna e João contam com a sua ajuda para colocar as listas em ordem decrescente em relação as notas.
+
+
+
+OBS: Está proibido o uso de funções de ordenação de listas. Além disso, não haverá casos de empate nas notas.
+
+Dica: Segue abaixo dois vídeos explicando a lógica do método de ordenação por flutuação (ou bubble sort):
+
+Bubble-sort dance
+Bubble-sort simulação
+Input
+
+O primeiro input será o nome de quem está enviando as listas com os filmes, sendo Bonna ou João:
+
+nome = Nome do dono da lista.
+
+O segundo, será a quantidade de filmes e notas que as listas possuem:
+
+quantidade = Quantidade de filmes e notas.
+
+Após isso, seu programa irá receber os nomes e as notas respectivamente, no formato:
+
+{nome_filme} - {nota_filme}
+
+OBS: você deve usar .split() para tratar as entradas
+
+Output
+
+Caso a dona da lista seja Bonna, você deverá printar a mensagem:
+
+"Os filmes sugeridos por Bonna são:”
+
+Caso o dono da lista seja João, você deverá printar a mensagem:
+
+"Os filmes sugeridos por João são:”
+
+Após isso, você deverá printar a lista com os filmes e as notas no seguinte formato:
+
+{filme} - {nota}

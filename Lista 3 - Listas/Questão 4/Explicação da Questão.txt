@@ -1,0 +1,44 @@
+Um belo dia, você estava no CIn super empolgado fazendo questões da lista nova de IP/P1 e acabou não notando que já passava da meia noite. Percebendo que precisava ir embora, você arrumou suas coisas e saiu pelos corredores, mas notou algo estranho… os corredores estavam escuros e parecia haver alguém lhe seguindo. Quando você olha para trás, vê uma figura medonha em um triciclo. De tão sinistra que era a situação, você entrou em choque e desmaiou. Quando acordou, você se encontrou em um ambiente desconhecido e insalubre (QUE MEDO!!). Você havia sido sequestrado. Uma televisão ligou e nela aparece a criatura que havia lhe capturado, ele fala com você com uma voz rouca:
+
+Olá, meu nome é Jigsaw e eu quero jogar um jogo com você.
+Em seguida, ele diz que, se você responder os desafios corretamente, você poderá sair pela porta da frente e voltar para o CIn para fazer questões de P1/IP. Entretanto, se não conseguir, a morte será inevitável. Por sorte, Jigsaw esqueceu de roubar sua bolsa e nela havia um notebook que você sabia que seria muito útil para os desafios.
+
+Input
+
+Primeiramente, Jigsaw quer que você encontre as palavras escondidas na sala, portanto, a entrada terá 10 palavras da seguinte forma:
+
+palavra_1
+
+palavra_2
+
+palavra_3
+
+.
+
+.
+
+.
+
+palavra_10
+
+Output
+
+Em seguida, você procederá para cumprir os 2 desafios:
+
+Passo 1:
+
+Inicialmente, Jigsaw quer que você informe a ele todas as strings que não se repetiram da lista de strings que você encontrou. A saída deverá ser da seguinte maneira:
+
+As palavras sao: palavra_que_nao_repete_1 . . . palavra_que_nao_repete_k
+
+OBS: Entretanto, como seu notebook não tem todas as bibliotecas de python instaladas, você não poderá utilizar o método count() ou qualquer outra função pré-definida para isso.
+
+Passo 2:
+
+Após isso, Jigsaw disse que você deve fazer a soma do tamanho das palavras da lista desconsiderando aquelas que se repetem. Você deve então printar a soma desses valores.
+
+A soma do tamanho das palavras é: {soma_das_palavras}
+
+Ao final de tudo, Jigsaw deve dizer:
+
+Estou impressionado, você me venceu, pode ir embora...

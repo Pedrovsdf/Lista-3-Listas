@@ -1,0 +1,131 @@
+str_artistas = input()
+artistas = str_artistas.split(" - ")
+musicas = []
+notas_dean = []
+notas_sam = []
+soma = []
+lista_comentarios = []
+comentando = True
+comentando2 = True
+nao_parou = True
+dando_notas = True
+
+str_musicas = input()
+list_musicas = str_musicas.split(" - ")
+
+for i in range(len(artistas)):
+    musicas.append([])
+
+for i in range(len(artistas)):
+    d = 0
+    s = 0
+
+    for j in range(len(list_musicas)):
+        musicas[i].append(list_musicas[j])
+        notas_dean.append([])
+        notas_sam.append([])
+    
+    if i < len(artistas)-1:
+      comentando = True
+    
+    if i == len(artistas)-1:
+      while comentando2:
+        str_comentario = input()
+        split_comentario = str_comentario.split(": ")
+        if len(split_comentario) == 2 and not split_comentario[1].isdigit():
+          ultimo_split = split_comentario[1].split(" - ")
+          nome_palpite = split_comentario[0]
+          if len(ultimo_split) == 2:
+            palpite = ultimo_split
+            comentando2 = False
+        else:
+          if len(split_comentario) == 1:
+            comentando2 = False
+            list_musicas = str_comentario.split(" - ")
+          else:
+            lista_comentarios.append(split_comentario)
+    
+    while comentando:
+      str_comentario = input()
+      split_comentario = str_comentario.split(": ")
+      if len(split_comentario) == 2 and not split_comentario[1].isdigit():
+        if len(split_comentario[1]) == 2:
+          comentando = False
+      else:
+        if len(split_comentario) == 1:
+          comentando = False
+          list_musicas = str_comentario.split(" - ")
+        else:
+          lista_comentarios.append(split_comentario)
+      
+dean_deu_nota = False
+sam_deu_nota = False
+for i in range(len(lista_comentarios)):
+  if dean_deu_nota and sam_deu_nota:
+    d += 1
+    s += 1
+    dean_deu_nota = False
+    sam_deu_nota = False
+  if lista_comentarios[i][0] == 'Dean':
+    dean_deu_nota = True
+    notas_dean[d] = lista_comentarios[i][1]
+  else:
+    sam_deu_nota = True
+    notas_sam[s] = lista_comentarios[i][1]
+
+for x in range(len(notas_dean)):
+  soma.append(int(notas_dean[x]) + int(notas_sam[x]))
+
+maior = max(soma)
+maior_index = soma.index(maior)
+palpite_artista = palpite[0]
+palpite = palpite[1]
+
+musicas_novo = []
+
+for i in range(len(musicas)):
+  musicas_novo += musicas[i]
+
+repetido = musicas_novo.count(palpite)
+
+if repetido > 1:
+  soma_novo = []
+  total = []
+  x = 0
+  for i in range(len(artistas)):
+    soma_novo.append([])
+    for j in range(len(musicas[i])):
+      soma_novo[i].append(soma[x])
+      x += 1
+
+  for i in range(len(artistas)):
+    total.append([])
+    
+  for i in range(len(artistas)):
+    total[i].append(artistas[i])
+    total[i].append(musicas[i])
+    total[i].append(soma_novo[i])
+      
+
+  maximo_atual = 0
+
+  for i in range(len(artistas)):
+    if total[i][0] == palpite_artista:
+      for j in range(len(total[i][1])):
+        if palpite == total[i][1][j]:
+          maximo_atual = total[i][2][j]
+
+  if maximo_atual == maior:
+      print(f'Caraca {nome_palpite} mandou bem! Essa música é a mais braba, com a nota {maior}')
+  else:
+      print(f'Podia ter escolhido outra música, {nome_palpite}. '
+            f'Essa é boa, mas perde em {maior - maximo_atual} pontos pra a música com a melhor nota')
+else:
+  index_musica_palpite = musicas_novo.index(palpite)
+  soma_palpite = soma[index_musica_palpite]
+
+  if index_musica_palpite == maior_index:
+    print(f'Caraca {nome_palpite} mandou bem! Essa música é a mais braba, com a nota {maior}')
+  else:
+    print(f'Podia ter escolhido outra música, {nome_palpite}. '
+          f'Essa é boa, mas perde em {maior - soma_palpite} pontos pra a música com a melhor nota')
